@@ -14,10 +14,7 @@ export interface TagProps {
 }
 
 export default function Home() {
-  const [tags, setTags] = useState<TagProps[]>([
-    { id: 1, name: 'Denise 1', description: 'description 1' },
-    { id: 2, name: 'Denise 2', description: 'description 2' },
-  ]);
+  const [tags, setTags] = useState<TagProps[]>([]);
 
   const deleteTag = (id: number) => {
     const updatedTags = tags.filter((tag) => tag.id !== id);
