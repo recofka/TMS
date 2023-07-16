@@ -7,14 +7,14 @@ declare module 'styled-components' {
       black: string;
       white: string;
       transparent: string;
-      background: string;
       blue: string;
-      lightblue: string;
+      darkblue: string;
       lighterblue: string;
-      lightestblue: string;
       gray: string;
       darkgray: string;
+      purple: string;
       red: string;
+      green: string;
     };
   }
 }
