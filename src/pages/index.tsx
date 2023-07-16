@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { Poppins } from 'next/font/google';
-import { Main, Title } from '@/styles/elements';
+import { Header, MainContainer } from '@/styles/elements';
 import ListTags from '@/components/ListTags';
+import CreateTagForm from '@/components/CreateTag';
 
 const poppins = Poppins({ weight: ['400', '700'], subsets: ['latin'] });
 
@@ -33,6 +34,15 @@ export default function Home() {
     setTags(updatedTags);
   };
 
+  const addTag = (name: string, description: string) => {
+    const newTag: TagProps = {
+      id: Date.now(),
+      name,
+      description,
+    };
+    setTags([...tags, newTag]);
+  };
+
   return (
     <>
       <Head>
@@ -41,11 +51,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Main className={poppins.className}>
-        <Title>TMS</Title>
 
+      <MainContainer className={poppins.className}>
+        <Header>
+          <span>TMS</span>
+        </Header>
+        <CreateTagForm onAdd={addTag} />
         <ListTags tags={tags} onDelete={deleteTag} onEdit={editTag} />
-      </Main>
+      </MainContainer>
     </>
   );
 }

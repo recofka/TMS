@@ -8,11 +8,12 @@ export const defaultTheme: DefaultTheme = {
     transparent: 'transparent',
     blue: '#394867',
     darkblue: '#445d95',
-    lighterblue: '#a3d2ed',
+    lighterblue: '#d0e6f3',
     gray: '#9BA4B5',
     darkgray: '#767676',
     purple: '#4c1e92',
     red: '#CD1818',
     green: '#00DFA2',
+    yellow: '#c6c23f',
   },
 };

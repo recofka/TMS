@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { TagProps } from '../pages/index';
 import {
   Button,
-  FormEdit,
+  Form,
   Input,
   Item,
   ItemBodyText,
   ItemFooter,
   ItemTitle,
   Label,
+  ListTag,
   Span,
   UnorderedList,
 } from '@/styles/elements';
@@ -49,61 +50,66 @@ const ListTags = ({ tags, onDelete, onEdit }: TagListProps) => {
   };
 
   return (
-    <UnorderedList>
-      {tags.map((tag) => (
-        <Item key={tag.id}>
-          {editTagId === tag.id ? (
-            <>
-              <FormEdit onSubmit={() => handleSaveEdit(tag.id)}>
-                <Label htmlFor="tagDescription">Tag Name:</Label>
-                <Input
-                  type="text"
-                  value={editedName}
-                  onChange={(e) => setEditedName(e.target.value)}
-                  placeholder="Tag Name"
-                  required
-                />
-                <Label htmlFor="tagDescription">Tag Description:</Label>
-                <Input
-                  id="tagDescription"
-                  type="text"
-                  value={editedDescription}
-                  onChange={(e) => setEditedDescription(e.target.value)}
-                  placeholder="Tag Description"
-                  required
-                />
+    <ListTag>
+      <UnorderedList>
+        {tags.map((tag) => (
+          <Item key={tag.id}>
+            {editTagId === tag.id ? (
+              <>
+                <Form onSubmit={() => handleSaveEdit(tag.id)}>
+                  <Label htmlFor="tagDescription">Tag Name:</Label>
+                  <Input
+                    type="text"
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    placeholder="Edit a Name"
+                    required
+                  />
+
+                  <Label htmlFor="tagDescription">Tag Description:</Label>
+                  <Input
+                    id="tagDescription"
+                    type="text"
+                    value={editedDescription}
+                    onChange={(e) => setEditedDescription(e.target.value)}
+                    placeholder="Edit a Description"
+                    required
+                  />
+                  <ItemFooter>
+                    <Button type="submit">
+                      <CheckCircle size={20} alt="Save" />
+                    </Button>
+                    <Button onClick={handleCancelEdit}>
+                      <XCircle size={20} alt="Cancel" />
+                    </Button>
+                  </ItemFooter>
+                </Form>
+              </>
+            ) : (
+              <>
+                <Span>Tag Name:</Span>
+                <ItemTitle>{tag.name}</ItemTitle>
+
+                <Span>Tag Description:</Span>
+                <ItemBodyText>{tag.description}</ItemBodyText>
                 <ItemFooter>
-                  <Button type="submit">
-                    <CheckCircle size={20} alt="Save" />
+                  <Button
+                    onClick={() =>
+                      handleEdit(tag.id, tag.name, tag.description)
+                    }
+                  >
+                    <Pencil size={20} alt="Edit" />
                   </Button>
-                  <Button onClick={handleCancelEdit}>
-                    <XCircle size={20} alt="Cancel" />
+                  <Button onClick={() => handleDelete(tag.id)}>
+                    <Trash size={20} alt="Delete" />
                   </Button>
                 </ItemFooter>
-              </FormEdit>
-            </>
-          ) : (
-            <>
-              <Span>Tag Name:</Span>
-              <ItemTitle>{tag.name}</ItemTitle>
-
-              <Span>Tag Description:</Span>
-              <ItemBodyText>{tag.description}</ItemBodyText>
-              <ItemFooter>
-                <Button
-                  onClick={() => handleEdit(tag.id, tag.name, tag.description)}
-                >
-                  <Pencil size={20} alt="Edit" />
-                </Button>
-                <Button onClick={() => handleDelete(tag.id)}>
-                  <Trash size={20} alt="Delete" />
-                </Button>
-              </ItemFooter>
-            </>
-          )}
-        </Item>
-      ))}
-    </UnorderedList>
+              </>
+            )}
+          </Item>
+        ))}
+      </UnorderedList>
+    </ListTag>
   );
 };
 
